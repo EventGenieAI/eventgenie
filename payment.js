@@ -202,6 +202,23 @@
         // Setup event handlers
         setupEventHandlers();
         setupStepNavigation();
+
+        // Handle page visibility - reset spinner when returning from Stripe
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && currentStep === 4) {
+                // User returned to the page on step 4, stop spinner
+                const btns = [
+                    document.getElementById('plansContinueBtn'),
+                    document.getElementById('bottomBarContinueBtn')
+                ];
+                btns.forEach(btn => {
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.classList.remove('button-loading');
+                    }
+                });
+            }
+        });
     }
 
     // Update vibe subtitle
