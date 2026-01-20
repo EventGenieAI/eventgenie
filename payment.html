@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventGenie - Book Your Event</title>
+    <link rel="icon" type="image/png" href="img/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3934892250057706'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=3934892250057706&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+    <!-- Header Logo -->
+    <header class="header">
+        <a href="index.html" target="_blank" class="logo-link">
+            <div class="logo">
+                <img src="img/logo.svg" alt="EventGenie Logo" class="logo-icon">
+                <img src="img/eventgenie-text.svg" alt="EventGenie" class="logo-text">
+            </div>
+        </a>
+    </header>
+
+    <!-- Payment Page Container -->
+    <main class="payment-page">
+        <!-- Progress Bar -->
+        <div class="payment-progress-bar">
+            <div class="payment-progress-fill" id="paymentProgressFill" style="width: 33.33%"></div>
+        </div>
+        
+        <div class="payment-steps-container">
+            <!-- Step 1: Select Museum -->
+            <section class="payment-step active" id="step1">
+                <button class="payment-step-back" id="backBtn1" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                
+                <div class="payment-step-header">
+                    <h2 class="payment-step-title">Meet people in London</h2>
+                    <div class="payment-step-subtitle vibe-selector" id="vibeSubtitle">
+                        <span>Your preferred vibe:</span>
+                        <button type="button" class="vibe-highlight vibe-toggle" id="vibeToggle" aria-haspopup="listbox" aria-expanded="false" data-vibe="classic">
+                            Classic &amp; Historical
+                        </button>
+                        <div class="vibe-dropdown" id="vibeDropdown" role="listbox">
+                            <button type="button" class="vibe-option" data-vibe="classic" aria-selected="true">Classic &amp; Historical</button>
+                            <button type="button" class="vibe-option" data-vibe="modern" aria-selected="false">Modern &amp; Provocative</button>
+                            <button type="button" class="vibe-option" data-vibe="visual" aria-selected="false">Photography &amp; Visuals</button>
+                        </div>
+                    </div>
+                    <p class="payment-step-subtitle">Book your next event</p>
+                </div>
+
+                <div class="payment-section">
+                    <div class="date-cards" id="dateCards">
+                        <!-- Dates will be dynamically loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Select Location -->
+            <section class="payment-step" id="step2">
+                <button class="payment-step-back" id="backBtn2">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                
+                <div class="payment-step-header">
+                    <h2 class="payment-step-title">Select your museum</h2>
+                    <p class="payment-step-subtitle">Choose the venue you'd like to visit on</p>
+                    <p class="payment-step-subtitle date-highlight" id="selectedDateDisplay" style="color: #FFD580; margin-top: 8px; font: inherit;"></p>
+                </div>
+
+                <div class="payment-section">
+                    <div class="event-cards" id="eventCards">
+                        <!-- Museums will be dynamically loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Confirmation -->
+            <section class="payment-step" id="step3">
+                <button class="payment-step-back" id="backBtn3">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                
+                <div class="payment-step-header">
+                    <h2 class="payment-step-title">Confirm your booking</h2>
+                    <p class="payment-step-subtitle">Review your selection and next steps</p>
+                </div>
+
+                <div class="payment-section">
+                    <div class="confirmation-card">
+                        <div class="confirmation-header">
+                            <div class="confirmation-icon">
+                                <img src="img/calendar-icon.webp" alt="Calendar">
+                                <span class="confirmation-calendar-day" id="confirmCalendarDay"></span>
+                            </div>
+                            <h3 class="confirmation-title">Your Event Details</h3>
+                        </div>
+                        
+                        <div class="confirmation-details">
+                            <div class="confirmation-item">
+                                <span class="confirmation-label">Date & Time:</span>
+                                <span class="confirmation-value" id="confirmDate">-</span>
+                            </div>
+                            <div class="confirmation-item">
+                                <span class="confirmation-label">Venue:</span>
+                                <span class="confirmation-value" id="confirmMuseum">-</span>
+                            </div>
+                            <div class="confirmation-item">
+                                <span class="confirmation-label">Vibe:</span>
+                                <span class="confirmation-value" id="confirmVibe">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="confirmation-card confirmation-info">
+                        <div class="confirmation-header">
+                            <div class="confirmation-icon">💬</div>
+                            <h3 class="confirmation-title">What happens next?</h3>
+                        </div>
+                        
+                        <div class="confirmation-steps">
+                            <div class="confirmation-step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4 class="step-title">Confirm your match</h4>
+                                    <p class="step-description">Finalize your spot in a group of 5 people matched to your personality.</p>
+                                </div>
+                            </div>
+
+                            <div class="confirmation-step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4 class="step-title">Join the group chat</h4>
+                                    <p class="step-description">Get added to a private WhatsApp group to meet your team and coordinate.</p>
+                                </div>
+                            </div>
+
+                            <div class="confirmation-step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4 class="step-title">Enjoy the experience</h4>
+                                    <p class="step-description">Get the meeting point, follow our conversation guide, and skip the small talk.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="payment-step-button" id="confirmContinueBtn">
+                        Confirm
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 4: Select Subscription Plan -->
+            <section class="payment-step" id="step4">
+                <button class="payment-step-back" id="backBtn4">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                
+                <div class="payment-step-header">
+                    <h2 class="payment-step-title">Choose your plan</h2>
+                </div>
+
+                <form id="subscriptionForm" class="payment-plans-form">
+                    <div class="plan-options">
+                        <label class="plan-option" data-plan="pay-per-event">
+                            <input type="radio" name="subscription_plan" value="pay-per-event" checked>
+                            <div class="plan-content">
+                                <span class="plan-duration">Single Event <span class="plan-type">(one off)</span></span>
+                                <span class="plan-price">£9.99</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-option" data-plan="1-month">
+                            <input type="radio" name="subscription_plan" value="1-month">
+                            <div class="plan-content">
+                                <span class="plan-duration">1 Month <span class="plan-type">(subscription)</span></span>
+                                <div class="plan-pricing">
+                                    <span class="plan-price">£13.99</span>
+                                    <span class="plan-weekly">£3.50/week</span>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <label class="plan-option" data-plan="3-months">
+                            <input type="radio" name="subscription_plan" value="3-months">
+                            <div class="plan-content">
+                                <span class="plan-duration">3 Months <span class="plan-type">(subscription)</span></span>
+                                <div class="plan-pricing">
+                                    <span class="plan-price-was">£41.97</span>
+                                    <span class="plan-price">£32.99</span>
+                                    <span class="plan-weekly">£2.75/week</span>
+                                </div>
+                            </div>
+                            <span class="plan-badge">Save 21%</span>
+                        </label>
+                        
+                        <label class="plan-option" data-plan="6-months">
+                            <input type="radio" name="subscription_plan" value="6-months">
+                            <div class="plan-content">
+                                <span class="plan-duration">6 Months <span class="plan-type">(subscription)</span></span>
+                                <div class="plan-pricing">
+                                    <span class="plan-price-was">£93.94</span>
+                                    <span class="plan-price">£44.99</span>
+                                    <span class="plan-weekly">£1.87/week</span>
+                                </div>
+                            </div>
+                            <span class="plan-badge">Save 46%</span>
+                        </label>
+                    </div>
+
+                    <button type="button" class="payment-step-button plans-continue-btn" id="plansContinueBtn">
+                        Continue to Payment
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Testimonials & Benefits -->
+                <div class="payment-testimonials">
+                    <div class="testimonial-header">
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-subtitle">Join other users happy with EventGenie</p>
+                    </div>
+
+                    <div class="testimonial-cards">
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars-small">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text">The vibe was warm and inclusive. Not like a networking event, but like dinner with friends you didn't know yet.</p>
+                            <p class="testimonial-author">~ EventGenie user</p>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars-small">⭐⭐⭐⭐⭐</div>
+                            <p class="testimonial-text">Such a refreshing way to meet new people in the city. I left the event energized and inspired.</p>
+                            <p class="testimonial-author">~ EventGenie user</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon benefit-icon-purple">✓</div>
+                        <div class="benefit-content">
+                            <h4 class="benefit-title">Curated experiences</h4>
+                            <p class="benefit-description">Meet like-minded people through hand-picked cultural events happening every week. Your city just got more interesting.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon benefit-icon-orange">✦</div>
+                        <div class="benefit-content">
+                            <h4 class="benefit-title">Always something new</h4>
+                            <p class="benefit-description">Fresh exhibitions, new faces, new conversations — every weekend feels different.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon benefit-icon-blue">♥</div>
+                        <div class="benefit-content">
+                            <h4 class="benefit-title">Real connections</h4>
+                            <p class="benefit-description">After every event, stay in touch with people you genuinely clicked with.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon benefit-icon-green">↻</div>
+                        <div class="benefit-content">
+                            <h4 class="benefit-title">Total flexibility</h4>
+                            <p class="benefit-description">Cancel anytime. Change your plan or get a refund within 14 days — no strings attached.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="benefit-icon benefit-icon-teal">◉</div>
+                        <div class="benefit-content">
+                            <h4 class="benefit-title">And we're just getting started</h4>
+                            <p class="benefit-description">Soon: group chats, new event types, and more ways to make your city feel like home.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-footer-links">
+                    <a href="https://www.eventgenie.ai/terms-and-conditions" target="_blank" class="payment-footer-link">Terms & Conditions</a>
+                    <span class="payment-footer-separator">·</span>
+                    <a href="https://www.eventgenie.ai/privacy-policy" target="_blank" class="payment-footer-link">Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner">
+        <div class="cookie-content">
+            <p class="cookie-text">🍪 We respect your privacy. This site uses cookies to enhance your experience. We're fully compliant with data protection regulations.</p>
+            <button class="cookie-dismiss" onclick="this.parentElement.parentElement.style.display='none'">Got it</button>
+        </div>
+    </div>
+
+    <!-- Bottom Payment Notification Bar -->
+    <div class="payment-bottom-bar" id="paymentBottomBar">
+        <div class="payment-bottom-content">
+            <div class="payment-bottom-details">
+                <div class="payment-bottom-price" id="bottomBarPrice">£44.99 every 6 months</div>
+                <div class="payment-bottom-notice">
+                    <span class="payment-bottom-icon">🔔</span>
+                    <span id="bottomBarNotice">You will get notified before autorenewal</span>
+                </div>
+            </div>
+            <button type="button" class="payment-bottom-button" id="bottomBarContinueBtn">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+    <script src="payment.js"></script>
+</body>
+</html>
