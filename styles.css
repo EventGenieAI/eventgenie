@@ -1510,6 +1510,34 @@ body {
     background: rgba(255, 255, 255, 0.05);
 }
 
+.quiz-payment-button.claim-spot {
+    background: linear-gradient(135deg, #f59f0a 0%, #fbbf24 100%);
+    border-color: #f59f0a;
+    color: #0f0f0f;
+    flex: 1;
+    box-shadow: 0 0 20px rgba(245, 159, 10, 0.6);
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.quiz-payment-button.claim-spot:hover {
+    box-shadow: 0 0 30px rgba(245, 159, 10, 0.8), 0 0 50px rgba(245, 159, 10, 0.6);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+}
+
+.quiz-payment-button.claim-spot:active {
+    transform: translateY(0);
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(245, 159, 10, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(245, 159, 10, 0.9);
+    }
+}
+
 .quiz-payment-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -2482,6 +2510,11 @@ body {
     opacity: 1;
 }
 
+/* Add bottom padding to step 4 to prevent bottom bar from covering content */
+.payment-step#step4 {
+    padding-bottom: 120px;
+}
+
 .payment-step-back {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -2744,11 +2777,22 @@ body {
     box-shadow: 0 8px 20px rgba(250, 155, 46, 0.4);
 }
 
+.event-card.selected {
+    background: rgba(250, 155, 46, 0.08);
+    border-color: var(--primary-orange);
+}
+
 /* Date Cards */
 .date-cards {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.week-divider {
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    margin: 8px 0;
 }
 
 .date-card {
@@ -3406,8 +3450,13 @@ body {
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 24px;
         padding: 32px 32px 24px;
-        margin: 0;
+        margin: 0 0 60px 0;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Remove step4 padding on desktop since container has it */
+    .payment-step#step4 {
+        padding-bottom: 0;
     }
 
     .payment-step-header {

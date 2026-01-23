@@ -272,10 +272,10 @@
                     </div>
                     <div class="quiz-header">
                         <h2 class="quiz-title">The Event Filter</h2>
-                        <p class="quiz-subtitle">Choose your preferred vibe for this Saturday</p>
+                        <p class="quiz-subtitle">Choose your preferred vibe</p>
                     </div>
                     <div class="quiz-question">
-                        <label class="quiz-label">What is your preferred vibe for this Saturday?</label>
+                        <label class="quiz-label">What is your preferred vibe?</label>
                         <p class="quiz-helper">Choose one. We will match you with a group heading to a top-tier exhibition in this category.</p>
                         <div class="quiz-options">
                             <label class="quiz-option-card">
@@ -501,13 +501,11 @@
                     <div class="quiz-success">
                         <div class="quiz-success-icon">🎉</div>
                         <h2 class="quiz-success-title">A group with 5 compatible people was found!</h2>
-                        <p class="quiz-success-subtitle">Based on your preferences and your personality match, we have found your crowd for this Saturday.</p>
+                        <p class="quiz-success-subtitle">Based on your preferences and your personality match, we have found your crowd for the upcoming week.</p>
                         
                         <div class="quiz-payment-box">
-                            <p class="quiz-payment-text">💡 The event organization fee is £9.99 per event or £13.99 per month subscription. Are you willing to confirm your spot?</p>
                             <div class="quiz-payment-options">
-                                <button type="button" class="quiz-payment-button yes" id="confirmYes">Yes</button>
-                                <button type="button" class="quiz-payment-button no" id="confirmNo">No</button>
+                                <button type="button" class="quiz-payment-button claim-spot" id="confirmYes">Claim my spot</button>
                             </div>
                         </div>
                     </div>
@@ -531,13 +529,29 @@
     </div>
 
     <!-- Cookie Consent Banner -->
-    <div class="cookie-banner">
+    <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
             <p class="cookie-text">🍪 We respect your privacy. This site uses cookies to enhance your experience. We're fully compliant with data protection regulations.</p>
-            <button class="cookie-dismiss" onclick="this.parentElement.parentElement.style.display='none'">Got it</button>
+            <button class="cookie-dismiss" id="acceptCookies">Got it</button>
         </div>
     </div>
 
+    <script>
+        // Cookie banner logic
+        const cookieBanner = document.getElementById('cookieBanner');
+        const acceptCookiesBtn = document.getElementById('acceptCookies');
+        
+        // Check if user has already accepted cookies
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            cookieBanner.style.display = 'none';
+        }
+        
+        // Handle accept button click
+        acceptCookiesBtn.addEventListener('click', function() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieBanner.style.display = 'none';
+        });
+    </script>
     <script src="quiz.js"></script>
 </body>
 </html>
